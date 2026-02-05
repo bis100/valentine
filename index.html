@@ -6,66 +6,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    background: radial-gradient(circle at top, #2b1055, #000);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Pacifico', cursive;
     overflow: hidden;
+    color: white;
 }
 
-.card {
+/* Stars */
+.star {
+    position: absolute;
     background: white;
-    padding: 30px;
-    border-radius: 20px;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 35px;
+    border-radius: 25px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 0 40px rgba(255,105,180,0.6);
     width: 90%;
-    max-width: 360px;
-    position: relative;
+    max-width: 380px;
     z-index: 10;
 }
 
 h1 {
-    color: #ff2e63;
-    margin-bottom: 25px;
-    font-size: 22px;
+    color: #ffb6c1;
+    font-size: 24px;
+    margin-bottom: 30px;
 }
 
 button {
-    padding: 12px 28px;
-    font-size: 16px;
+    padding: 14px 30px;
+    font-size: 18px;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     cursor: pointer;
+    font-family: 'Pacifico', cursive;
 }
 
 .yes {
-    background: #ff2e63;
+    background: linear-gradient(135deg, #ff4d6d, #ff85a2);
     color: white;
 }
 
 .no {
-    background: #ddd;
+    background: #444;
+    color: white;
     position: absolute;
     left: 20px;
-    top: 120px;
-}
-
-/* Floating hearts */
-.heart {
-    position: absolute;
-    bottom: -20px;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-110vh); opacity: 0; }
+    top: 140px;
 }
 </style>
 </head>
@@ -73,69 +74,91 @@ button {
 <body>
 
 <div class="card">
-    <h1>💘 Nishita Pagag, will you be my Valentine? 💘</h1>
+    <h1>🌌 Nishita Pagag 🌌<br>Will you be my Valentine?</h1>
     <button class="yes" onclick="yesClick()">Yes ❤️</button>
     <button class="no" id="noBtn">No 😢</button>
 </div>
 
 <script>
+/* Stars background */
+for (let i = 0; i < 120; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.width = star.style.height = Math.random() * 2 + "px";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(star);
+}
+
+/* NO button escape */
 const noBtn = document.getElementById("noBtn");
 const card = document.querySelector(".card");
 
-/* Move NO button */
-function randomMove() {
-    const maxX = card.clientWidth - noBtn.offsetWidth;
-    const maxY = card.clientHeight - noBtn.offsetHeight;
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-}
-setInterval(randomMove, 700);
+setInterval(() => {
+    noBtn.style.left = Math.random() * (card.clientWidth - noBtn.offsetWidth) + "px";
+    noBtn.style.top = Math.random() * (card.clientHeight - noBtn.offsetHeight) + "px";
+}, 600);
 
-/* Floating hearts */
-function createHeart() {
+/* Heart rain */
+function heartRain() {
     const heart = document.createElement("div");
-    heart.className = "heart";
     heart.innerHTML = "💖";
+    heart.style.position = "absolute";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.top = "-20px";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.animation = "fall 4s linear";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, 500);
 
-/* YES clicked */
+    setTimeout(() => heart.remove(), 4000);
+}
+setInterval(heartRain, 250);
+
+/* YES CLICK — CINEMATIC REVEAL */
 function yesClick() {
     document.body.innerHTML = `
+    <style>
+    @keyframes fadeIn {
+        from {opacity:0; transform:scale(0.9);}
+        to {opacity:1; transform:scale(1);}
+    }
+    </style>
+
     <div style="
+        animation:fadeIn 1.5s ease;
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
         height:100vh;
-        background:linear-gradient(135deg,#ff758c,#ff7eb3);
-        color:white;
+        background:radial-gradient(circle at top, #ff5f9e, #2b1055);
         text-align:center;
         padding:20px;
     ">
-        <h1>💖 Yayyy Nishita! 💖</h1>
-        <p style="font-size:18px;">
-            You just made my heart the happiest ❤️
+
+        <h1 style="font-size:30px;">💖 Nishita Pagag 💖</h1>
+
+        <p style="max-width:500px; font-size:18px; margin-top:10px;">
+            In this universe, among billions of stars,<br>
+            my heart chose <b>you</b> 🌌❤️<br><br>
+            And like SRK said…<br>
+            <b>“Palat…”</b>
         </p>
 
-        <iframe 
-            width="320"
-            height="570"
-            src="https://www.youtube.com/embed/iZ9Aq8qoyyc?autoplay=1&mute=1"
-            title="For Nishita"
+        <iframe
+            width="330"
+            height="580"
+            src="https://www.youtube.com/embed/iZ9Aq8qoyyc?autoplay=1"
             frameborder="0"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen
-            style="margin-top:20px; border-radius:12px;">
+            style="margin-top:25px; border-radius:20px; box-shadow:0 0 40px rgba(255,255,255,0.5);">
         </iframe>
 
-        <h2 style="margin-top:20px;">❤️ Always you, Nishita ❤️</h2>
-        <h3>🌹 Happy Valentine’s Day 🌹</h3>
-    </div>`;
+        <h2 style="margin-top:25px;">🌹 Happy Valentine’s Day 🌹</h2>
+        <h3>— Yours, always ❤️</h3>
+    </div>
+    `;
 }
 </script>
 
