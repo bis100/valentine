@@ -88,7 +88,7 @@ const noBtn = document.getElementById("noBtn");
 const card = document.querySelector(".card");
 const music = document.getElementById("bgMusic");
 
-/* NO button movement */
+// Move NO button
 function randomMove() {
     const maxX = card.clientWidth - noBtn.offsetWidth;
     const maxY = card.clientHeight - noBtn.offsetHeight;
@@ -97,7 +97,7 @@ function randomMove() {
 }
 setInterval(randomMove, 700);
 
-/* Floating hearts */
+// Floating hearts
 function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
@@ -109,7 +109,7 @@ function createHeart() {
 }
 setInterval(createHeart, 500);
 
-/* YES click */
+// YES clicked
 function yesClick() {
     music.play();
 
@@ -126,11 +126,11 @@ function yesClick() {
         padding:20px;
     ">
         <h1>💖 Yayyy YOUR NAME! 💖</h1>
-        <p style="font-size:18px;">Picture this… Shah Rukh Khan style 😍</p>
+        <p style="font-size:18px;">Just like SRK’s iconic “Palat…” 💫</p>
         <img 
-          src="https://www.gif-vif.com/desigif/palat-turn-shah-rukh-khan-ddlj-dilwale-dulhania-le-jayenge-f2e486d5ba"
-          alt="Shah Rukh Khan iconic pose"
-          style="width:280px; margin-top:20px; border-radius:20px;">
+          src="https://aallooz.com/view/palat-turn-shah-rukh-khan-ddlj-dilwale-dulhania-le-jayenge-f2e486d5ba"
+          alt="Shah Rukh Khan iconic Palat turn"
+          style="width:300px; margin-top:20px; border-radius:20px;">
         <h2 style="margin-top:20px;">❤️ Palat… Palat… Palat ❤️</h2>
         <h3>🎉 Happy Valentine’s Day 🎉</h3>
     </div>`;
@@ -139,4 +139,3 @@ function yesClick() {
 
 </body>
 </html>
-
