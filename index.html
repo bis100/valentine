@@ -9,7 +9,7 @@
 body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,20 +22,21 @@ body {
     padding: 30px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     width: 90%;
-    max-width: 350px;
+    max-width: 360px;
     position: relative;
+    z-index: 10;
 }
 
 h1 {
-    color: #ff4d6d;
+    color: #ff2e63;
     margin-bottom: 25px;
     font-size: 22px;
 }
 
 button {
-    padding: 12px 25px;
+    padding: 12px 28px;
     font-size: 16px;
     border: none;
     border-radius: 25px;
@@ -43,7 +44,7 @@ button {
 }
 
 .yes {
-    background: #ff4d6d;
+    background: #ff2e63;
     color: white;
 }
 
@@ -53,35 +54,65 @@ button {
     left: 20px;
     top: 120px;
 }
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-    <h1>💘 NISHITA PAGAG, will you be my Valentine? 💘</h1>
+    <h1>💘 YOUR NAME, will you be my Valentine? 💘</h1>
     <button class="yes" onclick="yesClick()">Yes ❤️</button>
     <button class="no" id="noBtn">No 😢</button>
 </div>
 
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const noBtn = document.getElementById("noBtn");
 const card = document.querySelector(".card");
+const music = document.getElementById("bgMusic");
 
+/* NO button movement */
 function randomMove() {
     const maxX = card.clientWidth - noBtn.offsetWidth;
     const maxY = card.clientHeight - noBtn.offsetHeight;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
 }
-
 setInterval(randomMove, 700);
 
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 500);
+
+/* YES click */
 function yesClick() {
+    music.play();
+
     document.body.innerHTML = `
     <div style="
         display:flex;
@@ -89,14 +120,19 @@ function yesClick() {
         justify-content:center;
         align-items:center;
         height:100vh;
-        background:#ff9a9e;
+        background:linear-gradient(135deg,#ff758c,#ff7eb3);
         color:white;
         text-align:center;
         padding:20px;
     ">
-        <h1>💖 Yayyy NISHITA PAGAG! I knew it 😍💖</h1>
-        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-             style="width:250px; margin-top:20px; border-radius:20px;">
+        <h1>💖 Yayyy YOUR NAME! 💖</h1>
+        <p style="font-size:18px;">Picture this… Shah Rukh Khan style 😍</p>
+        <img 
+          src="https://media.giphy.com/media/l0ErLeqamV3UOARsA/giphy.gif"
+          alt="Shah Rukh Khan iconic pose"
+          style="width:280px; margin-top:20px; border-radius:20px;">
+        <h2 style="margin-top:20px;">❤️ Palat… Palat… Palat ❤️</h2>
+        <h3>🎉 Happy Valentine’s Day 🎉</h3>
     </div>`;
 }
 </script>
