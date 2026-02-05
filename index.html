@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine 💖</title>
+<title>For Nishita 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -67,39 +67,22 @@ button {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-110vh); opacity: 0; }
 }
-
-/* Sound button */
-.sound-btn {
-    margin-top: 15px;
-    padding: 10px 22px;
-    border-radius: 25px;
-    background: #ff2e63;
-    color: white;
-    border: none;
-    font-size: 15px;
-}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-    <h1>💘 NISHITA PAGAG, will you be my Valentine? 💘</h1>
+    <h1>💘 Nishita Pagag, will you be my Valentine? 💘</h1>
     <button class="yes" onclick="yesClick()">Yes ❤️</button>
     <button class="no" id="noBtn">No 😢</button>
 </div>
 
-<!-- Background Music -->
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <script>
 const noBtn = document.getElementById("noBtn");
 const card = document.querySelector(".card");
-const music = document.getElementById("bgMusic");
 
-// Move NO button
+/* Move NO button */
 function randomMove() {
     const maxX = card.clientWidth - noBtn.offsetWidth;
     const maxY = card.clientHeight - noBtn.offsetHeight;
@@ -108,7 +91,7 @@ function randomMove() {
 }
 setInterval(randomMove, 700);
 
-// Floating hearts
+/* Floating hearts */
 function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
@@ -120,10 +103,8 @@ function createHeart() {
 }
 setInterval(createHeart, 500);
 
-// YES clicked
+/* YES clicked */
 function yesClick() {
-    music.play();
-
     document.body.innerHTML = `
     <div style="
         display:flex;
@@ -136,35 +117,25 @@ function yesClick() {
         text-align:center;
         padding:20px;
     ">
-        <h1>💖 Yayyy NISHITA PAGAG! 💖</h1>
-        <p style="font-size:18px;">I LOVE YOU ❤️</p>
+        <h1>💖 Yayyy Nishita! 💖</h1>
+        <p style="font-size:18px;">
+            You just made my heart the happiest ❤️
+        </p>
 
-        <iframe
-            id="ytPlayer"
+        <iframe 
             width="320"
-            height="215"
-            src="https://www.youtube.com/embed/kCIR1FGQeIs?autoplay=1&mute=1&enablejsapi=1"
-            title="Shah Rukh Khan Palat Scene"
+            height="570"
+            src="https://www.youtube.com/embed/iZ9Aq8qoyyc?autoplay=1&mute=1"
+            title="For Nishita"
             frameborder="0"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen
             style="margin-top:20px; border-radius:12px;">
         </iframe>
 
-        <button class="sound-btn" onclick="unmuteVideo()">🔊 Turn On Sound</button>
-
-        <h2 style="margin-top:20px;">❤️ Palat… Palat… Palat ❤️</h2>
-        <h3>🎉 Happy Valentine’s Day 🎉</h3>
+        <h2 style="margin-top:20px;">❤️ Always you, Nishita ❤️</h2>
+        <h3>🌹 Happy Valentine’s Day 🌹</h3>
     </div>`;
-}
-
-// Unmute YouTube video
-function unmuteVideo() {
-    const iframe = document.getElementById("ytPlayer");
-    iframe.contentWindow.postMessage(
-        '{"event":"command","func":"unMute","args":""}',
-        '*'
-    );
 }
 </script>
 
